@@ -4,10 +4,41 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <title>ATM</title>
     <script src="./assets/js/app.js"></script>
 </head>
 <body>
+    
+    <div class="container">
+        <h1>Приветствую в Банкомате</h1>
+        <div class="form-group d-flex flex-row py-1">
+            <label class="w-30" for="bankCash">Введите сумму</label>
+            <input class="form-control" oninput="bankATM()" type="number" name="" id="bankCash" value="1000" required>
+            <button class="m-2" onclick="bankATM()">Выдать деньги</button>
+        </div>
+        <div>
+            <table class="table table-striped align-self-center" >
+                <div>
+                    <p id="message"></p>
+                </div>
+                <div>
+                    <p id="countBond"></p>
+                </div>
+                <thead>
+                    <tr>
+                        <th scope = "col" >Номинал купюры</th>
+                        <th scope = "col" >-</th>
+                        <th scope = "col" >Колличество купюр</th>
+                    </tr>
+                </thead>
+                <tbody id="resultCash">
+    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
     
 </body>
 </html>

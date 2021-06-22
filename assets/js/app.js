@@ -1,6 +1,8 @@
 
     const maxNotesLimit = 40;
 
+    let ATMInfo2 = [];
+
     let xhr = new XMLHttpRequest();
 
     xhr.open('GET', './data/atm-info.json');
@@ -11,10 +13,17 @@
 
         console.log(ATMInfo);
 
+        ATMInfo2 = [...ATMInfo]
         /* Вы можете разместить свой код здесь */
+    }
 
-        const cashSum = 40453;
+    xhr.send();
 
+    let bankATM = function (cashSum = bankCash.value){
+
+        message.innerText = '';
+        resultCash.innerText  = '';
+        
         let remainCash = cashSum;
 
         let banknotesToHand = {};
@@ -23,7 +32,7 @@
 
         let bond = 0;
 
-        for (let banknotes of ATMInfo) {
+        for (let banknotes of ATMInfo2) {
             
             if (remainCash >= +banknotes.denomination){
                 
@@ -45,16 +54,30 @@
             }else continue;   
 
         };
+
+        for (key in banknotesToHand){
+          let row = resultCash.insertRow(0);
+        
+          let cell = row.insertCell();
+          let text = document.createTextNode(key);
+          cell.appendChild(text);
+
+          cell = row.insertCell();
+          text = document.createTextNode(' - ');
+          cell.appendChild(text);
+
+          cell = row.insertCell();
+          text = document.createTextNode(banknotesToHand[key]);
+          cell.appendChild(text);
+        }
+
+        countBond.innerText = `Колличество купюр ${bond}`;
+
         if (remainCash > 0){
-            console.log(`Введите сумму, кратную ${multiplicity}`)
+            message.innerText = `Введите сумму, кратную ${multiplicity}`;
         }
         if (bond > maxNotesLimit) {
-            console.log(`Превышен лимит колличества купюр, более ${maxNotesLimit}`);
+            message.innerText = `Превышен лимит колличества купюр, более ${maxNotesLimit}`;
         }
 
-        console.log(banknotesToHand);
-        console.log(remainCash, multiplicity, bond);
-
     }
-
-    xhr.send();
